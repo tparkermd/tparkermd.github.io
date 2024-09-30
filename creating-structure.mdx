@@ -1,0 +1,159 @@
+# Creating Structure
+While Splash does not have an official grid system component within our doppler library, our interfaces are still designed on a grid system.
+
+The Splash Product Design team uses a 12 column grid when designing Splash interfaces. In this page, we will discuss how designers conceptualize and talk about grids versus how engineers implement grids via the CSS Grid or CSS Flex Box specifications. 😊
+
+## Contents
+What is CSS Grid?
+Fractional Values
+So when should we use CSS Grid?
+How do Product Designers think about Grids?
+How do Engineers think about Grids?
+How do we treat grids when we have nested containers?
+How do we align our understanding of Grid Systems?
+Product Designers + Engineering Team Agreements
+
+
+### What is CSS Grid?
+CSS Grid Complete Guide | MDN Docs | CSS Grid Garden Game
+
+CSS Grid is an incredibly powerful tool to create layouts in modern browsers. The most important grid-related properties are:
+
+display: grid;
+grid-template-columns: <columns values>;
+Important possible values for grid-template-columns:
+
+/* 100px column + one column filling remaining space */
+grid-template-columns: 100px 1fr;
+
+/* one column that can be a min of 100px and max full container width */
+/* (1fr with no other fractional units = 100% wide) */
+grid-template-columns: minmax(100px, 1fr);
+
+/* formula for max(auto, min(40%, max-content)) */
+grid-template-columns: fit-content(40%);
+
+/* three 200px columns */
+grid-template-columns: repeat(3, 200px);
+
+/* a 200px column, a 300px column, and auto-filling the rest of the available space with 100px columns */
+grid-template-columns: 200px 300px repeat(auto-fill, 100px);
+
+/* a column that is at min 100px and at max fitting the context of the column */
+/* a column auto-filling the available space with 100px columns */
+/* a column that is 20% wide */
+grid-template-columns:
+  minmax(100px, max-content)
+  repeat(auto-fill, 200px) 20%;
+Fractional Values
+A particularly special part of CSS grid is using fractional values, which can be depicted as:
+
+grid-template-columns: 1fr; /* 100% */
+grid-template-columns: 3fr 1fr; /* 75% and 25% */
+grid-template-columns: 1fr auto 1fr; /* two 1fr columns that expand to take up space not used by the center `auto` column */
+grid-template-columns: 3fr 6fr 3fr; /* same as 1fr 2fr 1fr */
+With a fractional value (fr), you can think of it as... well, a fraction.
+
+The denominator of this fraction is the sum of the values (for example, 1fr 2fr 1fr = 4fr total). The numerator of this fraction is the value before fr (2fr). So, 1fr is equivalent to 1/4 of the container. This can give you a rough percentage-like calculation of how much space your fraction will take up.
+
+The benefit of fractions over percentages is that, when you combine fractions with non-fraction values, the fraction will automatically scale to take up the remaining space. Think of this as being like flex-grow: 1.
+
+Additionally, fr values will account for gutters (gap) while percentages do not.
+
+So when should we use CSS Grid?
+When we know we need a consistent two dimensional grid structure.
+Flex Box struggles to make consistent column structures once the second vertical dimension of rows comes into play.
+When we need to create complex structures that are not intended to be flexible (such as UIs requiring min/max/repeat/auto-fill functionalities)
+When we want to create UI templates where we can slot certain features (like having a top bar and a sidebar menu) using grid-area
+Thar be dragons here!!! Following this pattern can very easily result in accessibility issues due to HTML structure being inconsistent with visual structure
+How do Product Designers think about Grids?
+When a designer is interacting with their design tool of choice (i.e. Figma, Sketch), there is always a feature to add a multi-column overlay to the frame they are editing. This allows designers to create a normalized layout across their designs.
+
+The overlay generally looks like this: image of 12 column grid
+You can see that there are 12 columns. The spaces between the columns are called "gutters." Tools like Figma allow designers to snap their designs to these grids for faster designing and more consistent products.
+
+When Product Designers use 12 column grids, they are thinking about spatial layout. When engineers use grids, they are creating page structure.
+
+This is a key difference between Design and Engineering perspectives.
+
+Thus, a designer may look at the above image and communicate that the centered box is 6 columns wide, with three columns on the left and three columns on the right. An engineer may look at the above image and see a container that is 50% wide.
+
+How do Engineers think about Grids?
+When engineers use grids, it's much more about creating structure. The ultimate number of columns that the interface was designed on (i.e. 12 columns) is not what matters. What matters is how many columns the actual HTML elements make.
+
+Let's dive into an example what this means:
+
+A designer is creating a design using a 12 column grid system but the elements in that grid are never less than 4 columns wide (meaning they would ultimately have 3 elements per row). From an engineering perspective, this a 3 column grid (even though it was originally designed in a 12 column system). three column engineering example
+Another thing to consider is that, even though a designer is designing within a grid system this does not automatically mean that Engineering will require CSS Grid to create the interface. Most UIs only require Flex Box technologies.
+
+Learn more about using Flex Box for "distributing space and aligning content" in this article, Use Cases For Flexbox.
+
+How do we treat grids when we have nested containers?
+For nested containers, we will treat each new container as its own 12 column grid. This prevents misalignment of elements inside the grid because engineers cannot align elements inside containers to grids set outside of those containers (see example below).
+
+This can be a point of confusion between engineers and designers, which is why we have an agreement to reset our grid system inside each container.
+
+Good
+image of nested columns
+Not So Good
+image of not nested columns design
+How do we align our understanding of Grid Systems?
+When Designers see this interface, they see a 12 columns UI while Engineers see a three column UI.
+
+image of designer vs developer perspective of grids
+One potential communication option to ensure designers and engineers are aligned would be to use the word up instead of column when describing the ultimate UI.
+
+Thus, rather than:
+
+Designers saying "This is 4 columns, 4 columns, 4 columns in our 12 column system"
+
+Engineers saying "That is a 3 column grid"
+
+we can align and say that it is a "3 up" structure.
+
+This helps mitigate the problem of discussing columns, since engineers and designers may think of columns differently.
+
+Product Designers + Engineering Team Agreements
+Both Product Designers and Engineering will use our Design Tokens when creating spacing within our grid system.
+Designers will use a 12 column system on Desktop and a 6 column system on Tablet and Mobile.
+The grid system only applies in a horizontal (landscape) direction. We do not have a row-based grid system. Vertical spacing is determined per-interface using our spacing tokens.
+Each container will be treated as its own grid.
+Additional UI Examples
+Event Settings UI
+Designer Perspective
+
+6 Columns / 3 Columns / 3 Columns
+
+Designer Perspective
+Engineering Perspective
+
+grid-template-columns: 2fr 1fr 1fr;
+/* OR */
+grid-template-columns: 50% 25% 25%;
+Engineering Perspective
+Event Overview UI
+Designer Perspective
+
+12 Columns (Flexible Content)
+
+6 Columns / 3 Columns / 3 Columns
+
+4 Columns / 4 Columns / 4 Columns
+
+Designer Perspective
+Engineering Perspective
+
+/* First Row */
+display: flex;
+justify-content: space-between;
+
+/* Second Row */
+grid-template-columns: 2fr 1fr 1fr;
+/* OR */
+grid-template-columns: 50% 25% 25%;
+
+/* Third Row */
+grid-template-columns: repeat(3, 1fr);
+/* OR */
+grid-template-columns: 1fr 1fr 1fr;
+Engineering Perspective
