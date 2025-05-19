@@ -1,0 +1,9 @@
+# Tips
+
+More to come :)
+
+1. Make sure you enable `Full accessibility tree view in Elements panel` in Chrome’s DevTools Settings (under `Experiments`).
+    1. This will provide you with a small button with a person icon in your Elements panel that shows the page as an accessibility tree.
+    
+2. If you are using a Mac, always show your scrollbars so you don’t miss a user experience specific to non-Mac devices. To do this, go to System Settings, then Appearance, and select "Always" under "Show scroll bars”.
+3. Chrome’s DevTools has a global search function hidden in the bottom pane where the Console usually shows. To make the pane visible, focus on the Chrome DevTools and hit the `Esc` key. Once you see the Console pane, click on the three dots settings indicator on the top left
