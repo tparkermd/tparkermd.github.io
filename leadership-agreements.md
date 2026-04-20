@@ -24,7 +24,7 @@
 - I am happy to set up weekly pairing time as desired.
 - I will review all MRs but my review is not necessarily blocking. I will follow up if I have any retroactive concerns.
 - No stakeholders beyond our team should be pinging you directly. Nudge them either my way or our PM’s way for updates, prioritization, or requests.
-- I am not the sole owner of our roadmap! Please add any ideas more than one ticket to our [Technical Roadmap](https://docs.google.com/spreadsheets/d/1FD7Ohsjdn1Zcyky1A8bvMaZMpGlxBSPQ3_7NAA1hALE/edit?usp=sharing) and single ticket items to our Engineering Backlog.
+- I am not the sole owner of our roadmap! Please add any ideas more than one ticket to our Technical Roadmap and single ticket items to our Engineering Backlog.
 - Team Agreements:
     - Comments should be avoided. All code should be readable like a book via variable names, function names, etc. Comments are often forgotten or ignored during code updates and can become outdated. This rarely, if ever, happens with variable names.
         - Example of what this can look like:
