@@ -11,7 +11,7 @@
     - What is your understanding of the next level?
     - What is your understanding of the delta between the two?
     - What are the actions you want to take to get to that level?
-    - How do you feel you have grown towards your goals in the last (week|month|year)?
+    - How do you feel you have grown towards your goals in the last (week / month / year)?
     - What did you learn this week?
 - You are welcome to funnel all questions and feedback through me, although this is a good skill to develop as you grow in your career.
     - This is a skill we can work together to develop.
